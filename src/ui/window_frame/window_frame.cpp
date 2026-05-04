@@ -11,9 +11,12 @@ bool WindowFrame::init(int width, int height, std::string title) {
 
     if (!glfwInit()) return false;
 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
     m_GLFWWindow = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
-   
     if (!m_GLFWWindow) return false;
 
     GLFWmonitor* primary = glfwGetPrimaryMonitor();
@@ -25,10 +28,9 @@ bool WindowFrame::init(int width, int height, std::string title) {
     ImGui::CreateContext();
     ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
     ImGui_ImplGlfw_InitForOpenGL(m_GLFWWindow, true);
-    ImGui_ImplOpenGL3_Init("#version 130");
+    ImGui_ImplOpenGL3_Init("#version 150");
 
     m_Initialized = true;
-
     return true;
 }
 
