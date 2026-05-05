@@ -1,4 +1,6 @@
 #include "window_frame.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
 
 WindowFrame::WindowFrame() {
     m_GLFWWindow = nullptr;
