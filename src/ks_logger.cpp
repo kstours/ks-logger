@@ -1,8 +1,9 @@
 ﻿#include <ks_logger.h>
-#include "imgui.h"
 #include "window_frame/window_frame.h"
 #include "ks_logger_ui/ks_logger_ui.h"
+#include "window_menu/window_menu.h"
 namespace {
+
 
 
     void loggerMain() {
@@ -13,8 +14,7 @@ namespace {
     void runLoggerWindow(int width, int height, std::string title) {
    
         WindowFrame& windowframe = WindowFrame::get();
-        LoggerUI& loggerui = LoggerUI::get();
-
+   
         if (!windowframe.init(width, height, title)) return;
 
         bool show_logger = true;
@@ -25,7 +25,7 @@ namespace {
             windowframe.startFrame();
 
             if (show_logger) {
-                    loggerui.renderLoggerUI(width,  height,  show_logger);
+                    logger_ui::renderLoggerUI(width,  height,  &show_logger);
             }
 
             else {
@@ -44,7 +44,10 @@ namespace ks {
     void Logger::init() {
         int width = 960;
         int height = 480;
-        std::string title = "KSLogger";
+        std::string title = "KS Logger";
+        
+        window_menu::initWindowMenu();
+
 		if (m_Initialized) return;
 
 		m_Initialized = true;

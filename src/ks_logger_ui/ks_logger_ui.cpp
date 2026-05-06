@@ -1,23 +1,44 @@
 #include "ks_logger_ui/ks_logger_ui.h"
+#include "window_menu/window_menu.h"
+#include "GLFW/glfw3.h"
 #include "imgui.h"
 
-// 1. ADD THIS CONSTRUCTOR DEFINITION
-LoggerUI::LoggerUI() 
-    : m_ShowLogger(true), m_GLFWWindow(nullptr), m_Initialized(false) 
-{
-    // You can initialize your member variables here
+
+void renderWindowMenu() {
+    if (ImGui::BeginMenuBar()) {
+        for (const auto & item : window_menu::menu) {
+        if (ImGui::BeginMenu(item.name.c_str())) { 
+            for (const auto & options : item.options) {
+                const char* keybind = options.keybind.empty() ? nullptr : options.keybind.c_str();
+                if (ImGui::MenuItem(options.name.c_str(),keybind)) { 
+                    if (options.callback) {
+                        options.callback();
+                     }
+                    }
+                }
+                ImGui::EndMenu();
+            }
+        }
+    }ImGui::EndMenuBar();
 }
- void LoggerUI::renderLoggerUI(int width, int height, bool show_logger){
-                // Centers the logger window
+         
+
+ void logger_ui::renderLoggerUI(int width, int height, bool* show_logger){
+                // Centers the logger ui
                 const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
                 float posX = (mode->width / 2.0f) - (width / 2.0f);
                 float posY = (mode->height / 2.0f) - (height / 2.0f);
                 ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiCond_FirstUseEver);
                 ImGui::SetNextWindowSize(ImVec2(width, height), ImGuiCond_FirstUseEver);
+                ImGuiWindowFlags flags = ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_MenuBar;
+                if (ImGui::Begin("KS Logger", show_logger, flags)) {
+                    //Menu Bar 
+                       
+                            renderWindowMenu();
+                         
 
-                if (ImGui::Begin("KSLogger", &show_logger, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse)) {
 
-                    ImGui::Text("it works");
+                    ImGui::Text("Hello World");
 
                 }
 

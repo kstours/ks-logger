@@ -37,6 +37,8 @@ add_library(ks_logger_lib STATIC
     "src/window_frame/window_frame.h"
     "src/ks_logger_ui/ks_logger_ui.cpp"
     "src/ks_logger_ui/ks_logger_ui.h"
+    "src/window_menu/window_menu.cpp"
+    "src/window_menu/window_menu.h"
 
 )
 
@@ -46,7 +48,7 @@ target_include_directories(ks_logger_lib PRIVATE "src/window_frame")
 target_link_libraries(ks_logger_lib PUBLIC imgui_setup glfw OpenGL::GL)
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/examples/main.cpp")
-    add_executable(KSLogger_Example "examples/main.cpp")
+    add_executable(KSLogger_Example WIN32 MACOSX_BUNDLE "examples/main.cpp")
     target_link_libraries(KSLogger_Example PRIVATE ks_logger_lib)
     
     if(APPLE)
