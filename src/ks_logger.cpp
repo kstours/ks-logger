@@ -26,6 +26,7 @@ namespace {
 
             if (show_logger) {
                     logger_ui::renderLoggerUI(width,  height,  &show_logger);
+  
             }
 
             else {
