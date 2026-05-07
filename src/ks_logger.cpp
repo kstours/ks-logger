@@ -1,7 +1,9 @@
 ﻿#include <ks_logger.h>
-#include "ui/window_frame/window_frame.h"
-
+#include "window_frame/window_frame.h"
+#include "ks_logger_ui/ks_logger_ui.h"
+#include "window_menu/window_menu.h"
 namespace {
+
 
 
     void loggerMain() {
@@ -12,30 +14,19 @@ namespace {
     void runLoggerWindow(int width, int height, std::string title) {
    
         WindowFrame& windowframe = WindowFrame::get();
-
+   
         if (!windowframe.init(width, height, title)) return;
 
         bool show_logger = true;
+        
+
+
         while (!windowframe.shouldClose()) {
             windowframe.startFrame();
 
             if (show_logger) {
-
-                // Centers the logger window
-                const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-                float posX = (mode->width / 2.0f) - (width / 2.0f);
-                float posY = (mode->height / 2.0f) - (height / 2.0f);
-                ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiCond_FirstUseEver);
-                ImGui::SetNextWindowSize(ImVec2(width, height), ImGuiCond_FirstUseEver);
-
-
-                if (ImGui::Begin("KSLogger", &show_logger, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse)) {
-
-                    ImGui::Text("Hello World");
-
-                }
-
-                ImGui::End();
+                    logger_ui::renderLoggerUI(width,  height,  &show_logger);
+  
             }
 
             else {
@@ -54,7 +45,10 @@ namespace ks {
     void Logger::init() {
         int width = 960;
         int height = 480;
-        std::string title = "KSLogger";
+        std::string title = "KS Logger";
+        
+        window_menu::initWindowMenu();
+
 		if (m_Initialized) return;
 
 		m_Initialized = true;

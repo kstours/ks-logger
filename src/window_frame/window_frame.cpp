@@ -1,4 +1,7 @@
 #include "window_frame.h"
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
 
 WindowFrame::WindowFrame() {
     m_GLFWWindow = nullptr;
@@ -26,7 +29,8 @@ bool WindowFrame::init(int width, int height, std::string title) {
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+    ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_ViewportsEnable | ImGuiConfigFlags_DockingEnable;
+    ImGui::GetIO().IniFilename = nullptr;
     ImGui_ImplGlfw_InitForOpenGL(m_GLFWWindow, true);
     ImGui_ImplOpenGL3_Init("#version 150");
 
