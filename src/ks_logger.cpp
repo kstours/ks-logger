@@ -1,4 +1,5 @@
 ﻿#include <ks_logger.h>
+#include <string>
 #include "window_frame/window_frame.h"
 #include "ks_logger_ui/ks_logger_ui.h"
 #include "window_menu/window_menu.h"
