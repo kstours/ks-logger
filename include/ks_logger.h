@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <thread>
 #include <atomic>
+#include <string>
 
 namespace ks {
 
@@ -11,6 +12,10 @@ namespace ks {
 		static Logger instance;
 		return instance;
 	}
+
+
+	bool registerChannel(const std::string& name);
+	void log( const std::string& message, const std::string& name = "Main Channel");
 
 	void init();
 	Logger(const Logger&) = delete;
