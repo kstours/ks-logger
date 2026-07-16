@@ -47,3 +47,17 @@ build/
 # OS-specific clutter
 .DS_Store
 Thumbs.db
+
+# Ignore the Visual Studio cache & settings folder
+.vs/
+
+# Build outputs
+bin/
+obj/
+
+# User-specific files (like slnx.sqlite)
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*slnx.sqlite

@@ -22,7 +22,7 @@ add_library(imgui_setup STATIC
     "external/imgui-docking/imgui_demo.cpp"
     "external/imgui-docking/backends/imgui_impl_glfw.cpp"
     "external/imgui-docking/backends/imgui_impl_opengl3.cpp"
-)
+  "src/log_channel/log_channel.h" "src/log_channel/log_channel.cpp")
 
 target_include_directories(imgui_setup PUBLIC 
     "external/imgui-docking"
@@ -40,7 +40,7 @@ add_library(ks_logger_lib STATIC
     "src/window_menu/window_menu.cpp"
     "src/window_menu/window_menu.h"
 
-)
+  "src/log_channel/log_channel.h" "src/log_channel/log_channel.cpp")
 
 target_include_directories(ks_logger_lib PUBLIC "include" "src")
 target_include_directories(ks_logger_lib PRIVATE "src/window_frame")
@@ -49,7 +49,7 @@ target_link_libraries(ks_logger_lib PUBLIC imgui_setup glfw OpenGL::GL)
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/examples/main.cpp")
     add_executable(KSLogger_Example #WIN32 MACOSX_BUNDLE
-     "examples/main.cpp")
+     "examples/main.cpp"  "src/log_channel/log_channel.h" "src/log_channel/log_channel.cpp")
     target_link_libraries(KSLogger_Example PRIVATE ks_logger_lib)
     
     if(APPLE)
